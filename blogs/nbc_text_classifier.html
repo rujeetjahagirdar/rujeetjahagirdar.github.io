@@ -26,11 +26,11 @@
 <p style="text-align: center;"><img src='../img/nbc_img/nbc_theory-2-1.png' width="600" height="400" /></p>
 <p><strong><span data-contrast="auto">Steps:</span></strong></p>
 <ol>
-<li data-leveltext="%1." data-font="Calibri" data-listid="1" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-1,&quot;335559685&quot;:1440,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,0],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%1.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="1" data-aria-level="1"><span data-contrast="auto">Loading Data</span></li>
+<strong><li data-leveltext="%1." data-font="Calibri" data-listid="1" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-1,&quot;335559685&quot;:1440,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,0],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%1.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="1" data-aria-level="1"><span data-contrast="auto">Loading Data</span></li></strong>
 <!-- </ol> -->
 <p><span data-contrast="auto">In this step we will load the given data into pandas dataframe. Here we have separate files for training data and testing data. So, we will create two datasets. Further we will divide the training dataset into a training dataset and validation dataset in the ratio of 75%-25%. We will use this validation dataset to find optimal parameters for our model.</span></p>
 <!-- <ol> -->
-<li data-leveltext="%1." data-font="Calibri" data-listid="2" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-2,&quot;335559685&quot;:1440,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,0],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%2.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="2" data-aria-level="2"><span data-contrast="auto">Data Processing</span></li>
+<strong><li data-leveltext="%1." data-font="Calibri" data-listid="2" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-2,&quot;335559685&quot;:1440,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,0],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%2.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="2" data-aria-level="2"><span data-contrast="auto">Data Processing</span></li></strong>
 <!-- </ol> -->
 <p><span data-contrast="auto">If we check the given data properly, we will see that there are some mission values in &lsquo;New_sentences&rsquo; columns. We will simply replace these missing values with the blank string.&nbsp;</span></p>
 <p><span data-contrast="auto">To use NBC, we need to convert these job descriptions sentences into individual words. As we can see in sample sentences, there are many punctuation marks and other symbols that we must remove. We will use regular expressions to filter out these symbols and keep only the words. This step is called tokenization. Next, we will further process these tokens. We will remove all the stop words and numeric tokens as they will not provide any valuable information to NBC model. Also, we will ignore the tokens which have length less or equals to 2 and which are not English.</span></p>
@@ -39,19 +39,19 @@
 <p style="text-align: center;"><img src='../img/nbc_img/Capture.PNG'/></p>
 <p style="text-align: center;"><span data-contrast="auto">Source [1]</span></p>
 <!-- <ol> -->
-<li data-leveltext="%1." data-font="Calibri" data-listid="1" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-1,&quot;335559685&quot;:1440,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,0],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%1.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="3" data-aria-level="1"><span data-contrast="auto">Building Vocab</span></li>
+<strong><li data-leveltext="%1." data-font="Calibri" data-listid="1" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-1,&quot;335559685&quot;:1440,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,0],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%1.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="3" data-aria-level="1"><span data-contrast="auto">Building Vocab</span></li></strong>
 <!-- </ol> -->
 <p><span data-contrast="auto">In this step we will be building a vocabulary based on our train data. Here we will combine all the tokens according to their Target class. For example, we will combine all the tokens from all the sentences which have target class &ldquo;Education&rdquo; into one list.</span></p>
 <p style="text-align: center;"><img src='../img/nbc_img/type_by_words1.PNG' width="800" /></p>
 <p><span data-contrast="auto">Based on the above dataframe, we will create another dataframe called word_count_type, which will have count of how many times a particular word (from vocabulary) appeared&nbsp;in a sentence with each target class. </span></p>
 <!-- <ol> -->
 <p style="text-align: center;"><img src='../img/nbc_img/type_by_words.PNG' width="1000"/></p>
-<li data-leveltext="%1." data-font="Calibri" data-listid="1" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-1,&quot;335559685&quot;:1440,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,0],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%1.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="4" data-aria-level="1"><span data-contrast="auto">Laplace Smoothing</span></li>
+<strong><li data-leveltext="%1." data-font="Calibri" data-listid="1" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-1,&quot;335559685&quot;:1440,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,0],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%1.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="4" data-aria-level="1"><span data-contrast="auto">Laplace Smoothing</span></li></strong>
 <!-- </ol> -->
 <p><span data-contrast="auto">In the above &ldquo;word_count_type&rdquo; dataframe we can see that many of the counts are zero. So, we must use Laplace Smoothing to avoid zero probability. So, we will increase the count of every word in &ldquo;word_count_type&rdquo; dataframe by 1.</span></p>
 <!-- <ol> -->
 <p style="text-align: center;"><img src='../img/nbc_img/smoothed_type_by_words.PNG' width="800" /></p>
-<li data-leveltext="%1." data-font="Calibri" data-listid="1" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-1,&quot;335559685&quot;:1440,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,0],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%1.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="5" data-aria-level="1"><span data-contrast="auto">Predicting classes for validation and test data</span></li>
+<strong><li data-leveltext="%1." data-font="Calibri" data-listid="1" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-1,&quot;335559685&quot;:1440,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,0],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%1.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="5" data-aria-level="1"><span data-contrast="auto">Predicting classes for validation and test data</span></li></strong>
 <!-- </ol> -->
 <ol>
 <li data-leveltext="%2." data-font="Calibri" data-listid="1" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-1,&quot;335559685&quot;:2160,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,4],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%2.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="1" data-aria-level="2"><span data-contrast="auto">Finding Probabilities for each target class</span></li>
@@ -60,8 +60,8 @@
 <!-- <ol> -->
 </ol>
 <!-- <ol> -->
-<li data-leveltext="%1." data-font="Calibri" data-listid="1" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-1,&quot;335559685&quot;:1440,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,0],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%1.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="6" data-aria-level="1"><span data-contrast="auto">Experimentation:</span>
-</li>
+<strong><li data-leveltext="%1." data-font="Calibri" data-listid="1" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-1,&quot;335559685&quot;:1440,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,0],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%1.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="6" data-aria-level="1"><span data-contrast="auto">Experimentation:</span>
+</li></strong>
 <!-- </ol> -->
 <ol>
 <li data-leveltext="%2." data-font="Calibri" data-listid="1" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-1,&quot;335559685&quot;:2160,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,4],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%2.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="1" data-aria-level="2"><span data-contrast="auto">Trying different values for laplace smoothing</span>
@@ -77,12 +77,24 @@
 <p style="text-align: center;"><img src='../img/nbc_img/top10wordsbyclass.PNG' width="800" /></p>
 </li>
 </ol>
-<li data-leveltext="%2." data-font="Calibri" data-listid="1" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-1,&quot;335559685&quot;:2160,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,4],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%2.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="2" data-aria-level="2"><span data-contrast="auto">Predicting Target values for Test Dataset</span>
+<strong><li data-leveltext="%2." data-font="Calibri" data-listid="1" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-1,&quot;335559685&quot;:2160,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,4],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%2.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="2" data-aria-level="2"><span data-contrast="auto">Predicting Target values for Test Dataset</span></li></strong>
 <!-- </li> -->
 <!-- </ol> -->
 <p><span data-contrast="auto">We will use the optimal parameter that we found in the above step and use it to predict the target class for the test dataset.</span></p>
 <p style="text-align: center;"><p style="text-align: center;"><img src='../img/nbc_img/test_prediction.PNG' width="800" /></p>
 </li>
+<p><strong><span data-contrast="auto">Challenges:</span></strong></p>
+<ol>
+	<li data-leveltext="%2." data-font="Calibri" data-listid="1" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-1,&quot;335559685&quot;:2160,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,4],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%2.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="2" data-aria-level="2"><span data-contrast="auto">Execution time and memory space required for Vocab:</span>
+	<p><span data-contrast="auto">One of the major issue that I faced was execution time for code block for building vocab dataframe. I was trying to count the number of documents instead of frequency of words. After referencing the source[3], I realised I have to count the frequency of words not the frequency of documents/statements. I build an efficient dataframe consisting of target class types as rows and unique words in vocab as columns, which reduced execution time and made probabilities calculation very efficient and easy.</span></p>
+	</li>
+	<li data-leveltext="%2." data-font="Calibri" data-listid="1" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-1,&quot;335559685&quot;:2160,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,4],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%2.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="2" data-aria-level="2"><span data-contrast="auto">Writing function for calculating conditional probabilities:</span>
+	<p><span data-contrast="auto">Second challenge was to efficiently implement a function to calculate conditional probabilities. To overcome this issue designed a general function to which when called by passing list words and target class will return the probability value for classifying given words to given target class</span></p>
+	</li>
+	<li data-leveltext="%2." data-font="Calibri" data-listid="1" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-1,&quot;335559685&quot;:2160,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,4],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%2.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="2" data-aria-level="2"><span data-contrast="auto">Very small probability values:</span>
+	<p><span data-contrast="auto">Probability values for this text classification challenge very very low. So when values very low the program were rounding them off to zero. To resolve this issue, I used numpy's float 128 values. It helped me to do claculations for very small values as well.</span></p>
+	</li>
+</ol>
 <p><strong><span data-contrast="auto">References:</span></strong></p>
 <p><span data-contrast="auto">[1] </span><a href="https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html"><span data-contrast="none"><span data-ccp-char="">https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html</span></span></a></p>
 <p><span data-contrast="auto">[2] </span><a href="https://www.analyticsvidhya.com/blog/2017/09/naive-bayes-explained/"><span data-contrast="none"><span data-ccp-char="">https://www.analyticsvidhya.com/blog/2017/09/naive-bayes-explained/</span></span></a></p>
