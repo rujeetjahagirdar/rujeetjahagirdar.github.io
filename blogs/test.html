@@ -8,7 +8,7 @@
 <p><span data-contrast="auto">Introduction to NBC:</span></p>
 <p><span data-contrast="auto">Na&iuml;ve Bayes Classifier is the one of the simplest classification models. This model uses Bayes probability theorem. In this blog we will be using NBC for text classification. Here we will classify the sentences based on the words present in it.</span></p>
 <p><span data-contrast="auto">Bayes theorem provides a way of calculating posterior probability P(c|x) from P(c), P(x) and P(x|c) as per equation below:</span></p>
-<img src='../img/nbc_img/bayes_theo.webp' />
+<img src='../img/nbc_img/img100.jpg' />
 <p><span data-contrast="auto">Source: </span><a href="https://www.analyticsvidhya.com/blog/2017/09/naive-bayes-explained/"><span data-contrast="none"><span data-ccp-char="">https://www.analyticsvidhya.com/blog/2017/09/naive-bayes-explained/</span></span></a></p>
 <p><span data-contrast="auto">Here,&nbsp;</span></p>
 <p><span data-contrast="auto"> P(c|x) is the posterior probability of class (c, target) given predictor (x, attributes).</span></p>
@@ -18,6 +18,7 @@
 <p><span data-contrast="auto">For our text classification, </span></p>
 <p><span data-contrast="auto">c will be the target class type that we want to predict for each test sentence. </span></p>
 <p><span data-contrast="auto">x&nbsp;will be our list of tokens from sentence for which we want to predict the target class.</span></p>
+<img src='../img/nbc_img/nbc_theory-1-1.png' />
 <p><span data-contrast="auto">To calculate P([w1,w2,w3,&hellip;..]/t.c.) na&iuml;ve assumption is used. Na&iuml;ve assumption states that all the features are mutually independent. So our above equation becomes</span></p>
 <p><strong><span data-contrast="auto">Laplace Smoothing:</span></strong></p>
 <p><span data-contrast="auto">If a word that is present in test dataset but is not present in our train vocabulary, then it will have zero probability, which when plugged in the Bayes theorem, will give zero probability. So, to resolve this problem Laplace smoothing is used. In this technique count of each word is increased by &lsquo;alpha&rsquo; as follows:</span></p>
