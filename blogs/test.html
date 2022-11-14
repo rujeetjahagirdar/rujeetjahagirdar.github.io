@@ -2,9 +2,8 @@
 <p><strong><span data-contrast="auto">Introduction:</span></strong></p>
 <p><span data-contrast="auto">What are we doing?</span></p>
 <p><span data-contrast="auto">In this tutorial we will be building a Na&iuml;ve Bayes Text Classifier. A Na&iuml;ve Bayes Classifier is the easy to implement classifier. It uses Conditional probabilities and Bayes Theorem to calculate the probability of classification that we will see in detail in this blog.</span></p>
-<p><span data-contrast="auto">Dataset used?</span></p>
 <p><span data-contrast="auto">In this blog we will use the dataset provided in </span><a href="https://www.kaggle.com/datasets/gaveshjain/ford-sentence-classifiaction-dataset?resource=download"><span data-contrast="none"><span data-ccp-char="">Ford Sentence Classifiaction Dataset</span></span></a><span data-contrast="auto"> Kaggle competition. This is a text classification competition. Here we are given a collection of job description sentences and their respective types in the training dataset. In the test dataset we have a collection of job descriptions sentences and we have to classify them among 6 types ['Requirement' 'Responsibility', 'SoftSkill', 'Education', 'Experience', 'Skill'].&nbsp;</span></p>
-<p><strong><span data-contrast="auto">Main body:</span></strong></p>
+<p><strong><span data-contrast="auto">Theory:</span></strong></p>
 <p><span data-contrast="auto">Introduction to NBC:</span></p>
 <p><span data-contrast="auto">Na&iuml;ve Bayes Classifier is the one of the simplest classification models. This model uses Bayes probability theorem. In this blog we will be using NBC for text classification. Here we will classify the sentences based on the words present in it.</span></p>
 <p><span data-contrast="auto">Bayes theorem provides a way of calculating posterior probability P(c|x) from P(c), P(x) and P(x|c) as per equation below:</span></p>
@@ -52,7 +51,7 @@
 <p><span data-contrast="auto">In the above &ldquo;word_count_type&rdquo; dataframe we can see that many of the counts are zero. So, we must use Laplace Smoothing to avoid zero probability. So, we will increase the count of every word in &ldquo;word_count_type&rdquo; dataframe by 1.</span></p>
 <!-- <ol> -->
 <p style="text-align: center;"><img src='../img/nbc_img/smoothed_type_by_words.PNG' width="800" /></p>
-<li data-leveltext="%1." data-font="Calibri" data-listid="1" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-1,&quot;335559685&quot;:1440,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,0],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%1.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="5" data-aria-level="1"><span data-contrast="auto">Classifying validation and test data</span></li>
+<li data-leveltext="%1." data-font="Calibri" data-listid="1" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-1,&quot;335559685&quot;:1440,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,0],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%1.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="5" data-aria-level="1"><span data-contrast="auto">Predicting classes for validation and test data</span></li>
 <!-- </ol> -->
 <ol>
 <li data-leveltext="%2." data-font="Calibri" data-listid="1" data-list-defn-props="{&quot;335552541&quot;:0,&quot;335559684&quot;:-1,&quot;335559685&quot;:2160,&quot;335559991&quot;:360,&quot;469769242&quot;:[65533,4],&quot;469777803&quot;:&quot;left&quot;,&quot;469777804&quot;:&quot;%2.&quot;,&quot;469777815&quot;:&quot;hybridMultilevel&quot;}" data-aria-posinset="1" data-aria-level="2"><span data-contrast="auto">Finding Probabilities for each target class</span></li>
