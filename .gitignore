@@ -1,0 +1,14 @@
+# Dependencies
+node_modules
+
+# Build output
+dist
+.vite
+
+# System files
+.DS_Store
+*.log
+
+# Environment files
+.env
+.env.local
