@@ -108,16 +108,16 @@ export default function Portfolio() {
                 Specialized in designing and building high-performance APIs, distributed systems, and data infrastructure.
               </p>
               <div className="flex gap-4 pt-4">
-                <a href="https://github.com/rujeetjahagirdar" className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all">
+                <a href="https://github.com/rujeetjahagirdar" target="_blank" className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all">
                   <Github className="w-5 h-5" />
                 </a>
-                <a href="https://www.linkedin.com/in/rujeet-jahagirdar/" className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all">
+                <a href="https://www.linkedin.com/in/rujeet-jahagirdar/" target="_blank" className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all">
                   <Linkedin className="w-5 h-5" />
                 </a>
-                <a href="mailto:r1jahagirdar@example.com" className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all">
+                <a href="mailto:r1jahagirdar@example.com" target="_blank" className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all">
                   <Mail className="w-5 h-5" />
                 </a>
-                <a href="https://github.com/rujeetjahagirdar" className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all">
+                <a href="https://rujeetjahagirdar.github.io/" target="_blank" className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all">
                   <Globe className="w-5 h-5" />
                 </a>
               </div>
@@ -322,21 +322,21 @@ export default function Portfolio() {
                   <h3 className="text-xl font-semibold">Contact Information</h3>
                   
                   <div className="space-y-4">
-                    <a href="mailto:yourname@example.com" className="flex items-center gap-3 text-zinc-400 hover:text-emerald-400 transition-colors group">
+                    <a href="mailto:r1jahagirdar@gmail.com" target="_blank" className="flex items-center gap-3 text-zinc-400 hover:text-emerald-400 transition-colors group">
                       <div className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg group-hover:border-emerald-400/50 transition-colors">
                         <Mail className="w-5 h-5" />
                       </div>
                       <span>r1jahagirdar@gmail.com</span>
                     </a>
                     
-                    <a href="https://github.com" className="flex items-center gap-3 text-zinc-400 hover:text-emerald-400 transition-colors group">
+                    <a href="https://github.com" target="_blank" className="flex items-center gap-3 text-zinc-400 hover:text-emerald-400 transition-colors group">
                       <div className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg group-hover:border-emerald-400/50 transition-colors">
                         <Github className="w-5 h-5" />
                       </div>
                       <span>github.com/rujeetjahagirdar</span>
                     </a>
                     
-                    <a href="https://linkedin.com" className="flex items-center gap-3 text-zinc-400 hover:text-emerald-400 transition-colors group">
+                    <a href="https://linkedin.com" target="_blank" className="flex items-center gap-3 text-zinc-400 hover:text-emerald-400 transition-colors group">
                       <div className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg group-hover:border-emerald-400/50 transition-colors">
                         <Linkedin className="w-5 h-5" />
                       </div>
@@ -391,13 +391,13 @@ export default function Portfolio() {
               © 2025 Rujeet J. All rights reserved.
             </p>
             <div className="flex gap-4">
-              <a href="https://github.com/rujeetjahagirdar" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm">
+              <a href="https://github.com/rujeetjahagirdar" target="_blank" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm">
                 GitHub
               </a>
-              <a href="https://linkedin.com/in/rujeet-jahagirdar" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm">
+              <a href="https://linkedin.com/in/rujeet-jahagirdar" target="_blank" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm">
                 LinkedIn
               </a>
-              <a href="mailto:r1jahagirdar@gmail.com" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm">
+              <a href="mailto:r1jahagirdar@gmail.com" target="_blank" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm">
                 Email
               </a>
             </div>
