@@ -1,8 +1,32 @@
-import React, { useState } from 'react';
-import { Code2, Database, Server, Mail, Github, Linkedin, Calendar, ArrowRight, Terminal, Cpu, Globe } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Code2, Database, Server, Mail, Github, Linkedin, Calendar, ArrowRight, Terminal, Cpu, Globe, Clock } from 'lucide-react';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import rehypeHighlight from 'rehype-highlight';
+import rehypeRaw from 'rehype-raw';
+import 'highlight.js/styles/github-dark.css';
+import { getAllPosts } from './blogPosts';
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('about');
+  const [selectedArticle, setSelectedArticle] = useState(null);
+  const [blogPosts, setBlogPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (activeSection === 'blog' && blogPosts.length === 0) {
+      setLoading(true);
+      getAllPosts()
+        .then(posts => {
+          setBlogPosts(posts);
+          setLoading(false);
+        })
+        .catch(err => {
+          console.error('Error loading blog posts:', err);
+          setLoading(false);
+        });
+    }
+  }, [activeSection, blogPosts.length]);
 
   const projects = [
     {
@@ -11,16 +35,6 @@ export default function Portfolio() {
       tech: ["Flask", "Python", "AWS","PostgreSQL"],
       year: "2024",
       metrics: "99.99% uptime"
-    },
-  ];
-
-  const blogPosts = [
-    {
-      title: "Designing APIs for Scale: From 1K to 10M Requests",
-      date: "Dec 18, 2024",
-      excerpt: "Deep dive into architectural patterns, caching strategies, and database optimization techniques that enabled our API to scale 10,000x.",
-      readTime: "12 min read",
-      category: "Architecture"
     },
   ];
 
@@ -54,7 +68,6 @@ export default function Portfolio() {
 
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
-      {/* Navigation */}
       <nav className="border-b border-zinc-800 bg-zinc-950/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-5xl mx-auto px-6 py-4">
           <div className="flex items-center justify-between">
@@ -66,25 +79,25 @@ export default function Portfolio() {
             </div>
             <div className="flex gap-6 text-sm font-medium">
               <button 
-                onClick={() => setActiveSection('about')}
+                onClick={() => { setActiveSection('about'); setSelectedArticle(null); }}
                 className={`transition-colors ${activeSection === 'about' ? 'text-emerald-400' : 'text-zinc-400 hover:text-zinc-100'}`}
               >
                 About
               </button>
               <button 
-                onClick={() => setActiveSection('projects')}
+                onClick={() => { setActiveSection('projects'); setSelectedArticle(null); }}
                 className={`transition-colors ${activeSection === 'projects' ? 'text-emerald-400' : 'text-zinc-400 hover:text-zinc-100'}`}
               >
                 Projects
               </button>
               <button 
-                onClick={() => setActiveSection('blog')}
+                onClick={() => { setActiveSection('blog'); setSelectedArticle(null); }}
                 className={`transition-colors ${activeSection === 'blog' ? 'text-emerald-400' : 'text-zinc-400 hover:text-zinc-100'}`}
               >
                 Blog
               </button>
               <button 
-                onClick={() => setActiveSection('contact')}
+                onClick={() => { setActiveSection('contact'); setSelectedArticle(null); }}
                 className={`transition-colors ${activeSection === 'contact' ? 'text-emerald-400' : 'text-zinc-400 hover:text-zinc-100'}`}
               >
                 Contact
@@ -95,10 +108,8 @@ export default function Portfolio() {
       </nav>
 
       <div className="max-w-5xl mx-auto px-6 py-16">
-        {/* About Section */}
         {activeSection === 'about' && (
           <div className="space-y-16">
-            {/* Hero */}
             <div className="space-y-6">
               <h1 className="text-5xl font-bold leading-tight">
                 Software Engineer<br />
@@ -108,23 +119,21 @@ export default function Portfolio() {
                 Specialized in designing and building high-performance APIs, distributed systems, and data infrastructure.
               </p>
               <div className="flex gap-4 pt-4">
-                <a href="https://github.com/rujeetjahagirdar" target="_blank" className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all">
+                <a href="https://github.com/rujeetjahagirdar" target="_blank" rel="noopener noreferrer" className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all">
                   <Github className="w-5 h-5" />
                 </a>
-                <a href="https://www.linkedin.com/in/rujeet-jahagirdar/" target="_blank" className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all">
+                <a href="https://www.linkedin.com/in/rujeet-jahagirdar/" target="_blank" rel="noopener noreferrer" className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all">
                   <Linkedin className="w-5 h-5" />
                 </a>
-                <a href="mailto:r1jahagirdar@example.com" target="_blank" className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all">
+                <a href="mailto:r1jahagirdar@gmail.com" className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all">
                   <Mail className="w-5 h-5" />
                 </a>
-                <a href="https://rujeetjahagirdar.github.io/" target="_blank" className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all">
+                <a href="https://rujeetjahagirdar.github.io/" target="_blank" rel="noopener noreferrer" className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all">
                   <Globe className="w-5 h-5" />
                 </a>
               </div>
             </div>
 
-
-            {/* Skills */}
             <div className="space-y-6">
               <h2 className="text-3xl font-bold flex items-center gap-3">
                 <Server className="w-7 h-7 text-emerald-400" />
@@ -154,7 +163,6 @@ export default function Portfolio() {
               </div>
             </div>
 
-            {/* Experience */}
             <div className="space-y-6">
               <h2 className="text-3xl font-bold">Work Experience</h2>
               <div className="space-y-8">
@@ -226,7 +234,6 @@ export default function Portfolio() {
           </div>
         )}
 
-        {/* Projects Section */}
         {activeSection === 'projects' && (
           <div className="space-y-8">
             <div className="space-y-2">
@@ -268,47 +275,174 @@ export default function Portfolio() {
           </div>
         )}
 
-        {/* Blog Section */}
-        {activeSection === 'blog' && (
+        {activeSection === 'blog' && !selectedArticle && (
           <div className="space-y-8">
             <div className="space-y-2">
               <h1 className="text-4xl font-bold">Technical Blog</h1>
               <p className="text-zinc-400 text-lg">Thoughts on backend development, system design, and engineering practices</p>
             </div>
-            <div className="space-y-6">
-              {blogPosts.map((post, index) => (
-                <article 
-                  key={index}
-                  className="border border-zinc-800 rounded-lg p-6 hover:border-emerald-400/50 transition-all cursor-pointer group bg-zinc-900/30 hover:bg-zinc-900/50"
-                >
-                  <div className="space-y-3">
-                    <div className="flex items-center gap-3 text-sm">
-                      <span className="px-2 py-0.5 bg-emerald-400/10 border border-emerald-400/20 rounded text-emerald-400 font-medium text-xs">
-                        {post.category}
-                      </span>
-                      <span className="flex items-center gap-1.5 text-zinc-500">
-                        <Calendar className="w-3.5 h-3.5" />
-                        {post.date}
-                      </span>
-                      <span className="text-zinc-700">•</span>
-                      <span className="text-zinc-500">{post.readTime}</span>
+            
+            {loading ? (
+              <div className="text-center py-12 text-zinc-400">Loading blog posts...</div>
+            ) : blogPosts.length === 0 ? (
+              <div className="text-center py-12 text-zinc-400">No blog posts yet. Check back soon!</div>
+            ) : (
+              <div className="space-y-6">
+                {blogPosts.map((post) => (
+                  <article 
+                    key={post.id}
+                    onClick={() => setSelectedArticle(post)}
+                    className="border border-zinc-800 rounded-lg p-6 hover:border-emerald-400/50 transition-all cursor-pointer group bg-zinc-900/30 hover:bg-zinc-900/50"
+                  >
+                    <div className="space-y-3">
+                      <div className="flex items-center gap-3 text-sm">
+                        <span className="px-2 py-0.5 bg-emerald-400/10 border border-emerald-400/20 rounded text-emerald-400 font-medium text-xs">
+                          {post.category}
+                        </span>
+                        <span className="flex items-center gap-1.5 text-zinc-500">
+                          <Calendar className="w-3.5 h-3.5" />
+                          {post.date}
+                        </span>
+                        <span className="text-zinc-700">•</span>
+                        <span className="flex items-center gap-1.5 text-zinc-500">
+                          <Clock className="w-3.5 h-3.5" />
+                          {post.readTime}
+                        </span>
+                      </div>
+                      <h2 className="text-xl font-semibold group-hover:text-emerald-400 transition-colors">
+                        {post.title}
+                      </h2>
+                      <p className="text-zinc-400 leading-relaxed">{post.excerpt}</p>
+                      <div className="flex items-center gap-2 text-emerald-400 text-sm font-medium pt-2">
+                        Read article 
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </div>
                     </div>
-                    <h2 className="text-xl font-semibold group-hover:text-emerald-400 transition-colors">
-                      {post.title}
-                    </h2>
-                    <p className="text-zinc-400 leading-relaxed">{post.excerpt}</p>
-                    <div className="flex items-center gap-2 text-emerald-400 text-sm font-medium pt-2">
-                      Read article 
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
+                  </article>
+                ))}
+              </div>
+            )}
           </div>
         )}
 
-        {/* Contact Section */}
+        {activeSection === 'blog' && selectedArticle && (
+          <article className="space-y-8">
+            <button
+              onClick={() => setSelectedArticle(null)}
+              className="flex items-center gap-2 text-zinc-400 hover:text-emerald-400 transition-colors group"
+            >
+              <ArrowRight className="w-4 h-4 rotate-180 group-hover:-translate-x-1 transition-transform" />
+              Back to all articles
+            </button>
+
+            <header className="space-y-4 pb-8 border-b border-zinc-800">
+              <div className="flex items-center gap-3 text-sm">
+                <span className="px-3 py-1 bg-emerald-400/10 border border-emerald-400/20 rounded text-emerald-400 font-medium">
+                  {selectedArticle.category}
+                </span>
+                <span className="flex items-center gap-1.5 text-zinc-500">
+                  <Calendar className="w-4 h-4" />
+                  {selectedArticle.date}
+                </span>
+                <span className="text-zinc-700">•</span>
+                <span className="flex items-center gap-1.5 text-zinc-500">
+                  <Clock className="w-4 h-4" />
+                  {selectedArticle.readTime}
+                </span>
+              </div>
+              
+              <h1 className="text-4xl font-bold leading-tight text-zinc-100">
+                {selectedArticle.title}
+              </h1>
+
+              {selectedArticle.author && (
+                <div className="flex items-center gap-2 text-zinc-400">
+                  <span>By</span>
+                  <span className="font-medium text-zinc-300">{selectedArticle.author}</span>
+                </div>
+              )}
+            </header>
+
+            <div className="prose prose-invert prose-zinc max-w-none">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeHighlight, rehypeRaw]}
+                components={{
+                  h1: ({node, ...props}) => <h1 className="text-3xl font-bold text-zinc-100 mt-8 mb-4" {...props} />,
+                  h2: ({node, ...props}) => <h2 className="text-2xl font-semibold text-zinc-100 mt-6 mb-3" {...props} />,
+                  h3: ({node, ...props}) => <h3 className="text-xl font-semibold text-zinc-200 mt-4 mb-2" {...props} />,
+                  p: ({node, ...props}) => <p className="text-zinc-300 leading-relaxed mb-4" {...props} />,
+                  ul: ({node, ...props}) => <ul className="list-disc list-inside space-y-2 ml-4 mb-4 text-zinc-300" {...props} />,
+                  ol: ({node, ...props}) => <ol className="list-decimal list-inside space-y-2 ml-4 mb-4 text-zinc-300" {...props} />,
+                  li: ({node, ...props}) => <li className="text-zinc-300" {...props} />,
+                  code: ({node, inline, ...props}) => 
+                    inline ? (
+                      <code className="bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded text-sm text-emerald-400 font-mono" {...props} />
+                    ) : (
+                      <code className="text-sm" {...props} />
+                    ),
+                  pre: ({node, ...props}) => (
+                    <pre className="bg-zinc-900 border border-zinc-800 rounded-lg p-4 overflow-x-auto mb-4" {...props} />
+                  ),
+                  img: ({node, ...props}) => (
+                    <img className="rounded-lg border border-zinc-800 my-6 w-full" {...props} alt={props.alt || ''} />
+                  ),
+                  a: ({node, ...props}) => (
+                    <a className="text-emerald-400 hover:text-emerald-300 underline" target="_blank" rel="noopener noreferrer" {...props} />
+                  ),
+                  blockquote: ({node, ...props}) => (
+                    <blockquote className="border-l-4 border-emerald-400 pl-4 italic text-zinc-400 my-4" {...props} />
+                  ),
+                  strong: ({node, ...props}) => <strong className="text-zinc-100 font-semibold" {...props} />,
+                }}
+              >
+                {selectedArticle.content}
+              </ReactMarkdown>
+            </div>
+
+            <footer className="border-t border-zinc-800 pt-8 mt-12">
+              <div className="flex items-center justify-between">
+                <div className="space-y-1">
+                  <p className="text-sm text-zinc-500">Written by</p>
+                  <p className="font-semibold text-zinc-100">{selectedArticle.author || 'Rujeet J.'}</p>
+                </div>
+                <div className="flex gap-3">
+                  <a href="https://github.com/rujeetjahagirdar" target="_blank" rel="noopener noreferrer" className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all">
+                    <Github className="w-5 h-5" />
+                  </a>
+                  <a href="https://www.linkedin.com/in/rujeet-jahagirdar/" target="_blank" rel="noopener noreferrer" className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all">
+                    <Linkedin className="w-5 h-5" />
+                  </a>
+                </div>
+              </div>
+            </footer>
+
+            {blogPosts.length > 1 && (
+              <div className="border-t border-zinc-800 pt-8 mt-8">
+                <h3 className="text-2xl font-bold mb-6">More Articles</h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {blogPosts
+                    .filter(post => post.id !== selectedArticle.id)
+                    .slice(0, 2)
+                    .map((post) => (
+                      <div
+                        key={post.id}
+                        onClick={() => setSelectedArticle(post)}
+                        className="border border-zinc-800 rounded-lg p-4 hover:border-emerald-400/50 transition-all cursor-pointer group bg-zinc-900/30"
+                      >
+                        <span className="text-xs text-emerald-400 font-medium">{post.category}</span>
+                        <h4 className="font-semibold mt-2 group-hover:text-emerald-400 transition-colors">
+                          {post.title}
+                        </h4>
+                        <p className="text-sm text-zinc-500 mt-1">{post.readTime}</p>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            )}
+          </article>
+        )}
+
         {activeSection === 'contact' && (
           <div className="space-y-8">
             <div className="space-y-2">
@@ -322,21 +456,21 @@ export default function Portfolio() {
                   <h3 className="text-xl font-semibold">Contact Information</h3>
                   
                   <div className="space-y-4">
-                    <a href="mailto:r1jahagirdar@gmail.com" target="_blank" className="flex items-center gap-3 text-zinc-400 hover:text-emerald-400 transition-colors group">
+                    <a href="mailto:r1jahagirdar@gmail.com" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-zinc-400 hover:text-emerald-400 transition-colors group">
                       <div className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg group-hover:border-emerald-400/50 transition-colors">
                         <Mail className="w-5 h-5" />
                       </div>
                       <span>r1jahagirdar@gmail.com</span>
                     </a>
                     
-                    <a href="https://github.com" target="_blank" className="flex items-center gap-3 text-zinc-400 hover:text-emerald-400 transition-colors group">
+                    <a href="https://github.com/rujeetjahagirdar" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-zinc-400 hover:text-emerald-400 transition-colors group">
                       <div className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg group-hover:border-emerald-400/50 transition-colors">
                         <Github className="w-5 h-5" />
                       </div>
                       <span>github.com/rujeetjahagirdar</span>
                     </a>
                     
-                    <a href="https://linkedin.com" target="_blank" className="flex items-center gap-3 text-zinc-400 hover:text-emerald-400 transition-colors group">
+                    <a href="https://www.linkedin.com/in/rujeet-jahagirdar/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-zinc-400 hover:text-emerald-400 transition-colors group">
                       <div className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg group-hover:border-emerald-400/50 transition-colors">
                         <Linkedin className="w-5 h-5" />
                       </div>
@@ -383,7 +517,6 @@ export default function Portfolio() {
         )}
       </div>
 
-      {/* Footer */}
       <footer className="border-t border-zinc-800 mt-24">
         <div className="max-w-5xl mx-auto px-6 py-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
@@ -391,13 +524,13 @@ export default function Portfolio() {
               © 2025 Rujeet J. All rights reserved.
             </p>
             <div className="flex gap-4">
-              <a href="https://github.com/rujeetjahagirdar" target="_blank" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm">
+              <a href="https://github.com/rujeetjahagirdar" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm">
                 GitHub
               </a>
-              <a href="https://linkedin.com/in/rujeet-jahagirdar" target="_blank" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm">
+              <a href="https://www.linkedin.com/in/rujeet-jahagirdar/" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm">
                 LinkedIn
               </a>
-              <a href="mailto:r1jahagirdar@gmail.com" target="_blank" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm">
+              <a href="mailto:r1jahagirdar@gmail.com" className="text-zinc-500 hover:text-emerald-400 transition-colors text-sm">
                 Email
               </a>
             </div>

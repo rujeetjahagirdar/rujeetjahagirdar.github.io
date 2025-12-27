@@ -12,3 +12,6 @@ dist
 # Environment files
 .env
 .env.local
+
+# backup files
+src/App.jsx_bkp

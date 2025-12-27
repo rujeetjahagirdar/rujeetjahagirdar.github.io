@@ -1,0 +1,25 @@
+---
+id: 2
+title: Your Blog Post Title
+date: Dec 27, 2024
+readTime: 10 min read
+category: Tutorial
+excerpt: A brief description of your blog post that appears in the list view.
+author: Rujeet J.
+---
+
+# Your Blog Post Title
+
+Your content here with **markdown formatting**.
+
+## Subheading
+
+- Bullet points
+- More points
+```python
+# Code blocks work automatically
+def hello():
+    print("Hello World")
+```
+
+![Alt text](/src/assets/blog-images/your-image.png)
