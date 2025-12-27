@@ -1,42 +1,51 @@
 import React, { useState, useEffect } from 'react';
-import { Code2, Database, Server, Mail, Github, Linkedin, Calendar, ArrowRight, Terminal, Cpu, Globe, Clock } from 'lucide-react';
+import { Code2, Database, Server, Mail, Github, Linkedin, Calendar, ArrowRight, Terminal, Cpu, Globe, Clock, ExternalLink } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import rehypeHighlight from 'rehype-highlight';
 import rehypeRaw from 'rehype-raw';
 import 'highlight.js/styles/github-dark.css';
 import { getAllPosts } from './blogPosts';
+import { getAllProjects } from './projects';
 
 export default function Portfolio() {
   const [activeSection, setActiveSection] = useState('about');
   const [selectedArticle, setSelectedArticle] = useState(null);
+  const [selectedProject, setSelectedProject] = useState(null);
   const [blogPosts, setBlogPosts] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [projects, setProjects] = useState([]);
+  const [loadingBlog, setLoadingBlog] = useState(false);
+  const [loadingProjects, setLoadingProjects] = useState(false);
 
   useEffect(() => {
     if (activeSection === 'blog' && blogPosts.length === 0) {
-      setLoading(true);
+      setLoadingBlog(true);
       getAllPosts()
         .then(posts => {
           setBlogPosts(posts);
-          setLoading(false);
+          setLoadingBlog(false);
         })
         .catch(err => {
           console.error('Error loading blog posts:', err);
-          setLoading(false);
+          setLoadingBlog(false);
         });
     }
   }, [activeSection, blogPosts.length]);
 
-  const projects = [
-    {
-      title: "E-Commerce API Gateway",
-      description: "Scalable API gateway handling 15M+ daily requests with rate limiting, caching, and load balancing across multiple microservices",
-      tech: ["Flask", "Python", "AWS","PostgreSQL"],
-      year: "2024",
-      metrics: "99.99% uptime"
-    },
-  ];
+  useEffect(() => {
+    if (activeSection === 'projects' && projects.length === 0) {
+      setLoadingProjects(true);
+      getAllProjects()
+        .then(projs => {
+          setProjects(projs);
+          setLoadingProjects(false);
+        })
+        .catch(err => {
+          console.error('Error loading projects:', err);
+          setLoadingProjects(false);
+        });
+    }
+  }, [activeSection, projects.length]);
 
   const skills = [
     { 
@@ -66,6 +75,35 @@ export default function Portfolio() {
     }
   ];
 
+  const markdownComponents = {
+    h1: ({node, ...props}) => <h1 className="text-3xl font-bold text-zinc-100 mt-8 mb-4" {...props} />,
+    h2: ({node, ...props}) => <h2 className="text-2xl font-semibold text-zinc-100 mt-6 mb-3" {...props} />,
+    h3: ({node, ...props}) => <h3 className="text-xl font-semibold text-zinc-200 mt-4 mb-2" {...props} />,
+    p: ({node, ...props}) => <p className="text-zinc-300 leading-relaxed mb-4" {...props} />,
+    ul: ({node, ...props}) => <ul className="list-disc list-inside space-y-2 ml-4 mb-4 text-zinc-300" {...props} />,
+    ol: ({node, ...props}) => <ol className="list-decimal list-inside space-y-2 ml-4 mb-4 text-zinc-300" {...props} />,
+    li: ({node, ...props}) => <li className="text-zinc-300" {...props} />,
+    code: ({node, inline, ...props}) => 
+      inline ? (
+        <code className="bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded text-sm text-emerald-400 font-mono" {...props} />
+      ) : (
+        <code className="text-sm" {...props} />
+      ),
+    pre: ({node, ...props}) => (
+      <pre className="bg-zinc-900 border border-zinc-800 rounded-lg p-4 overflow-x-auto mb-4" {...props} />
+    ),
+    img: ({node, ...props}) => (
+      <img className="rounded-lg border border-zinc-800 my-6 w-full" {...props} alt={props.alt || ''} />
+    ),
+    a: ({node, ...props}) => (
+      <a className="text-emerald-400 hover:text-emerald-300 underline" target="_blank" rel="noopener noreferrer" {...props} />
+    ),
+    blockquote: ({node, ...props}) => (
+      <blockquote className="border-l-4 border-emerald-400 pl-4 italic text-zinc-400 my-4" {...props} />
+    ),
+    strong: ({node, ...props}) => <strong className="text-zinc-100 font-semibold" {...props} />,
+  };
+
   return (
     <div className="min-h-screen bg-zinc-950 text-zinc-100">
       <nav className="border-b border-zinc-800 bg-zinc-950/80 backdrop-blur-sm sticky top-0 z-50">
@@ -79,25 +117,25 @@ export default function Portfolio() {
             </div>
             <div className="flex gap-6 text-sm font-medium">
               <button 
-                onClick={() => { setActiveSection('about'); setSelectedArticle(null); }}
+                onClick={() => { setActiveSection('about'); setSelectedArticle(null); setSelectedProject(null); }}
                 className={`transition-colors ${activeSection === 'about' ? 'text-emerald-400' : 'text-zinc-400 hover:text-zinc-100'}`}
               >
                 About
               </button>
               <button 
-                onClick={() => { setActiveSection('projects'); setSelectedArticle(null); }}
+                onClick={() => { setActiveSection('projects'); setSelectedArticle(null); setSelectedProject(null); }}
                 className={`transition-colors ${activeSection === 'projects' ? 'text-emerald-400' : 'text-zinc-400 hover:text-zinc-100'}`}
               >
                 Projects
               </button>
               <button 
-                onClick={() => { setActiveSection('blog'); setSelectedArticle(null); }}
+                onClick={() => { setActiveSection('blog'); setSelectedArticle(null); setSelectedProject(null); }}
                 className={`transition-colors ${activeSection === 'blog' ? 'text-emerald-400' : 'text-zinc-400 hover:text-zinc-100'}`}
               >
                 Blog
               </button>
               <button 
-                onClick={() => { setActiveSection('contact'); setSelectedArticle(null); }}
+                onClick={() => { setActiveSection('contact'); setSelectedArticle(null); setSelectedProject(null); }}
                 className={`transition-colors ${activeSection === 'contact' ? 'text-emerald-400' : 'text-zinc-400 hover:text-zinc-100'}`}
               >
                 Contact
@@ -234,45 +272,171 @@ export default function Portfolio() {
           </div>
         )}
 
-        {activeSection === 'projects' && (
+        {activeSection === 'projects' && !selectedProject && (
           <div className="space-y-8">
             <div className="space-y-2">
               <h1 className="text-4xl font-bold flex items-center gap-3">
                 <Database className="w-8 h-8 text-emerald-400" />
                 Projects
               </h1>
+              <p className="text-zinc-400 text-lg">A collection of my backend engineering work</p>
             </div>
-            <div className="grid gap-6">
-              {projects.map((project, index) => (
-                <div 
-                  key={index}
-                  className="border border-zinc-800 rounded-lg p-6 hover:border-emerald-400/50 transition-all bg-zinc-900/30 hover:bg-zinc-900/50 group"
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div className="space-y-1">
-                      <h3 className="text-xl font-semibold group-hover:text-emerald-400 transition-colors">{project.title}</h3>
-                      <div className="flex items-center gap-3 text-sm">
-                        <span className="text-zinc-500">{project.year}</span>
-                        <span className="text-zinc-700">•</span>
-                        <span className="text-emerald-400 font-medium">{project.metrics}</span>
+            
+            {loadingProjects ? (
+              <div className="text-center py-12 text-zinc-400">Loading projects...</div>
+            ) : projects.length === 0 ? (
+              <div className="text-center py-12 text-zinc-400">No projects yet. Check back soon!</div>
+            ) : (
+              <div className="grid gap-6">
+                {projects.map((project) => (
+                  <div 
+                    key={project.id}
+                    onClick={() => setSelectedProject(project)}
+                    className="border border-zinc-800 rounded-lg p-6 hover:border-emerald-400/50 transition-all bg-zinc-900/30 hover:bg-zinc-900/50 group cursor-pointer"
+                  >
+                    <div className="flex items-start justify-between mb-4">
+                      <div className="space-y-1 flex-1">
+                        <h3 className="text-xl font-semibold group-hover:text-emerald-400 transition-colors">{project.title}</h3>
+                        <div className="flex items-center gap-3 text-sm">
+                          <span className="text-zinc-500">{project.year}</span>
+                          <span className="text-zinc-700">•</span>
+                          <span className="text-emerald-400 font-medium">{project.metrics}</span>
+                        </div>
                       </div>
                     </div>
+                    <p className="text-zinc-400 mb-4 leading-relaxed">{project.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {project.tech && project.tech.map((tech) => (
+                        <span 
+                          key={tech}
+                          className="px-2.5 py-1 bg-emerald-400/10 border border-emerald-400/20 rounded text-xs text-emerald-400 font-medium"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    <div className="flex items-center gap-2 text-emerald-400 text-sm font-medium pt-4">
+                      View details 
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
-                  <p className="text-zinc-400 mb-4 leading-relaxed">{project.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {project.tech.map((tech) => (
-                      <span 
-                        key={tech}
-                        className="px-2.5 py-1 bg-emerald-400/10 border border-emerald-400/20 rounded text-xs text-emerald-400 font-medium"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
+        )}
+
+        {activeSection === 'projects' && selectedProject && (
+          <article className="space-y-8">
+            <button
+              onClick={() => setSelectedProject(null)}
+              className="flex items-center gap-2 text-zinc-400 hover:text-emerald-400 transition-colors group"
+            >
+              <ArrowRight className="w-4 h-4 rotate-180 group-hover:-translate-x-1 transition-transform" />
+              Back to all projects
+            </button>
+
+            <header className="space-y-4 pb-8 border-b border-zinc-800">
+              <h1 className="text-4xl font-bold leading-tight text-zinc-100">
+                {selectedProject.title}
+              </h1>
+              
+              <div className="flex items-center gap-4 text-sm">
+                <span className="text-zinc-500">{selectedProject.year}</span>
+                <span className="text-zinc-700">•</span>
+                <span className="text-emerald-400 font-medium">{selectedProject.metrics}</span>
+              </div>
+
+              <div className="flex flex-wrap gap-2">
+                {selectedProject.tech && selectedProject.tech.map((tech) => (
+                  <span 
+                    key={tech}
+                    className="px-2.5 py-1 bg-emerald-400/10 border border-emerald-400/20 rounded text-xs text-emerald-400 font-medium"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              {(selectedProject.github || selectedProject.demo) && (
+                <div className="flex gap-3 pt-2">
+                  {selectedProject.github && (
+                    <a 
+                      href={selectedProject.github} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all text-sm"
+                    >
+                      <Github className="w-4 h-4" />
+                      View Code
+                    </a>
+                  )}
+                  {selectedProject.demo && (
+                    <a 
+                      href={selectedProject.demo} 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-4 py-2 bg-emerald-400/10 border border-emerald-400/20 rounded-lg text-emerald-400 hover:bg-emerald-400/20 transition-all text-sm"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      Live Demo
+                    </a>
+                  )}
+                </div>
+              )}
+            </header>
+
+            <div className="prose prose-invert prose-zinc max-w-none">
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                rehypePlugins={[rehypeHighlight, rehypeRaw]}
+                components={markdownComponents}
+              >
+                {selectedProject.content}
+              </ReactMarkdown>
+            </div>
+
+            <footer className="border-t border-zinc-800 pt-8 mt-12">
+              <div className="flex items-center justify-between">
+                <div className="space-y-1">
+                  <p className="text-sm text-zinc-500">Built by</p>
+                  <p className="font-semibold text-zinc-100">Rujeet J.</p>
+                </div>
+                <div className="flex gap-3">
+                  <a href="https://github.com/rujeetjahagirdar" target="_blank" rel="noopener noreferrer" className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all">
+                    <Github className="w-5 h-5" />
+                  </a>
+                  <a href="https://www.linkedin.com/in/rujeet-jahagirdar/" target="_blank" rel="noopener noreferrer" className="p-2 bg-zinc-900 border border-zinc-800 rounded-lg text-zinc-400 hover:text-emerald-400 hover:border-emerald-400/50 transition-all">
+                    <Linkedin className="w-5 h-5" />
+                  </a>
+                </div>
+              </div>
+            </footer>
+
+            {projects.length > 1 && (
+              <div className="border-t border-zinc-800 pt-8 mt-8">
+                <h3 className="text-2xl font-bold mb-6">More Projects</h3>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {projects
+                    .filter(proj => proj.id !== selectedProject.id)
+                    .slice(0, 2)
+                    .map((project) => (
+                      <div
+                        key={project.id}
+                        onClick={() => setSelectedProject(project)}
+                        className="border border-zinc-800 rounded-lg p-4 hover:border-emerald-400/50 transition-all cursor-pointer group bg-zinc-900/30"
+                      >
+                        <span className="text-xs text-emerald-400 font-medium">{project.year}</span>
+                        <h4 className="font-semibold mt-2 group-hover:text-emerald-400 transition-colors">
+                          {project.title}
+                        </h4>
+                        <p className="text-sm text-zinc-500 mt-1 line-clamp-2">{project.description}</p>
+                      </div>
+                    ))}
+                </div>
+              </div>
+            )}
+          </article>
         )}
 
         {activeSection === 'blog' && !selectedArticle && (
@@ -282,7 +446,7 @@ export default function Portfolio() {
               <p className="text-zinc-400 text-lg">Thoughts on backend development, system design, and engineering practices</p>
             </div>
             
-            {loading ? (
+            {loadingBlog ? (
               <div className="text-center py-12 text-zinc-400">Loading blog posts...</div>
             ) : blogPosts.length === 0 ? (
               <div className="text-center py-12 text-zinc-400">No blog posts yet. Check back soon!</div>
@@ -367,34 +531,7 @@ export default function Portfolio() {
               <ReactMarkdown
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeHighlight, rehypeRaw]}
-                components={{
-                  h1: ({node, ...props}) => <h1 className="text-3xl font-bold text-zinc-100 mt-8 mb-4" {...props} />,
-                  h2: ({node, ...props}) => <h2 className="text-2xl font-semibold text-zinc-100 mt-6 mb-3" {...props} />,
-                  h3: ({node, ...props}) => <h3 className="text-xl font-semibold text-zinc-200 mt-4 mb-2" {...props} />,
-                  p: ({node, ...props}) => <p className="text-zinc-300 leading-relaxed mb-4" {...props} />,
-                  ul: ({node, ...props}) => <ul className="list-disc list-inside space-y-2 ml-4 mb-4 text-zinc-300" {...props} />,
-                  ol: ({node, ...props}) => <ol className="list-decimal list-inside space-y-2 ml-4 mb-4 text-zinc-300" {...props} />,
-                  li: ({node, ...props}) => <li className="text-zinc-300" {...props} />,
-                  code: ({node, inline, ...props}) => 
-                    inline ? (
-                      <code className="bg-zinc-900 border border-zinc-800 px-1.5 py-0.5 rounded text-sm text-emerald-400 font-mono" {...props} />
-                    ) : (
-                      <code className="text-sm" {...props} />
-                    ),
-                  pre: ({node, ...props}) => (
-                    <pre className="bg-zinc-900 border border-zinc-800 rounded-lg p-4 overflow-x-auto mb-4" {...props} />
-                  ),
-                  img: ({node, ...props}) => (
-                    <img className="rounded-lg border border-zinc-800 my-6 w-full" {...props} alt={props.alt || ''} />
-                  ),
-                  a: ({node, ...props}) => (
-                    <a className="text-emerald-400 hover:text-emerald-300 underline" target="_blank" rel="noopener noreferrer" {...props} />
-                  ),
-                  blockquote: ({node, ...props}) => (
-                    <blockquote className="border-l-4 border-emerald-400 pl-4 italic text-zinc-400 my-4" {...props} />
-                  ),
-                  strong: ({node, ...props}) => <strong className="text-zinc-100 font-semibold" {...props} />,
-                }}
+                components={markdownComponents}
               >
                 {selectedArticle.content}
               </ReactMarkdown>

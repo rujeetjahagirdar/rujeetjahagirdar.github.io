@@ -23,3 +23,4 @@ def hello():
 ```
 
 ![Alt text](/src/assets/blog-images/your-image.png)
+![API Architecture](/src/assets/blog-images/api-architecture.png)
