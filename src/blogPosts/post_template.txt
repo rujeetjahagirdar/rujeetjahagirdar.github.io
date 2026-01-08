@@ -22,5 +22,5 @@ def hello():
     print("Hello World")
 ```
 
-![Alt text](/src/assets/blog-images/your-image.png)
-![API Architecture](/src/assets/blog-images/api-architecture.png)
+![Alt text](/images/blog-images/your-image.png)
+![API Architecture](/images/blog-images/api-architecture.png)
