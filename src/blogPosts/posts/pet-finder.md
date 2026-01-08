@@ -22,4 +22,4 @@ All of the pets like to escape and wonder around and this gets pet owner worried
 - Notify nearby users
 
 ## Architecture
-![Architecture](/src/assets/blog-images/pet_finder.excalidraw.png)
+![Architecture](/images/blog-images/pet_finder.excalidraw.png)
