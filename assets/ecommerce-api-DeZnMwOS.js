@@ -22,5 +22,5 @@ def example():
     pass
 \`\`\`
 
-![Screenshot](/src/assets/blog-images/screenshot.png)
+![Screenshot](/images/blog-images/screenshot.png)
 `;export{e as default};
