@@ -208,7 +208,7 @@ export default function Portfolio() {
                   <div className="absolute -left-[9px] top-0 w-4 h-4 bg-emerald-400 rounded-full"></div>
                   <div className="space-y-2">
                     <h3 className="font-semibold text-xl text-zinc-100">Software Engineer</h3>
-                    <p className="text-emerald-400 text-sm font-medium">SwipeSwipe • January 2025 - Present</p>
+                    <p className="text-emerald-400 text-sm font-medium">SwipeSwipe</p>
                     <ul className="text-zinc-400 space-y-2 mt-3">
                       <li className="flex gap-2">
                         <span className="text-emerald-400 mt-1">•</span>
@@ -229,7 +229,7 @@ export default function Portfolio() {
                   <div className="absolute -left-[9px] top-0 w-4 h-4 bg-zinc-700 rounded-full"></div>
                   <div className="space-y-2">
                     <h3 className="font-semibold text-xl text-zinc-100">Research Assistant, Software Developer</h3>
-                    <p className="text-zinc-400 text-sm font-medium">The University of Texas at Arlington • June 2024 - December 2024</p>
+                    <p className="text-zinc-400 text-sm font-medium">The University of Texas at Arlington</p>
                     <ul className="text-zinc-400 space-y-2 mt-3">
                       <li className="flex gap-2">
                         <span className="text-zinc-600 mt-1">•</span>
@@ -250,7 +250,7 @@ export default function Portfolio() {
                   <div className="absolute -left-[9px] top-0 w-4 h-4 bg-zinc-700 rounded-full"></div>
                   <div className="space-y-2">
                     <h3 className="font-semibold text-xl text-zinc-100">Software Engineer</h3>
-                    <p className="text-zinc-400 text-sm font-medium">PNC Bank • June 2019 - March 2022</p>
+                    <p className="text-zinc-400 text-sm font-medium">PNC Bank (TCS)</p>
                     <ul className="text-zinc-400 space-y-2 mt-3">
                       <li className="flex gap-2">
                         <span className="text-zinc-600 mt-1">•</span>
